@@ -1,0 +1,49 @@
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import LabelEncoder
+from sklearn.metrics import classification_report
+import joblib
+
+# 데이터셋 로드
+data = pd.read_csv('Conversation.csv')
+
+# 컬럼 이름 확인 및 선택
+# 'Input'과 'Output'을 예시로 사용하며, 실제 데이터에 맞게 변경해야 합니다.
+data = data[['question', 'answer']]
+
+# 결측치 제거
+data.dropna(inplace=True)
+
+# TF-IDF 변환기 초기화
+vectorizer = TfidfVectorizer()
+
+# 'Input' 컬럼을 기반으로 TF-IDF 학습 및 변환
+X = vectorizer.fit_transform(data['question'])
+
+# 레이블 인코딩
+encoder = LabelEncoder()
+y = encoder.fit_transform(data['answer'])
+
+# 데이터셋을 훈련 세트와 테스트 세트로 분리
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 분류 모델 초기화
+model = LogisticRegression()
+
+# 모델 훈련
+model.fit(X_train, y_train)
+# ^모델과 벡터라이저 저장
+joblib.dump(model,'./data_model.')
+joblib.dump(vectorizer, 'vectorizer.joblib')
+
+# 성능 평가
+y_pred = model.predict(X_test)
+print(classification_report(y_test, y_pred))
