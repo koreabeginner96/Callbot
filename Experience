@@ -1,0 +1,16 @@
+파이썬 바꿀때 이전 버전을 완벽히 지우고 다시깔자
+파이썬 pip 안될떄
+     환경변수 설정 해주기
+     아래 방법으로 pip 설치하기
+     C:\> curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+     C:\> python get-pip.py 
+
+     key= "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"
+
+
+AI 모델개발
+데이터 수집 : 캐글에서 대화 data 다운받음.
+데이터 전처리 : pandas 를 사용하여 간단하게 전처리함.
+텍스트 데이터를 수치로 변환 : Scikit-learn의 TfidfVectorizer를 사용
+
+미리 commit을하여 기록을 남길걸 3일차 부터 기록을 하지만 아쉽다.
