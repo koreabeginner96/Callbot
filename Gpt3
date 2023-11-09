@@ -1,0 +1,21 @@
+from openai import OpenAI
+
+client = OpenAI(
+    api_key="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"  # 실제 API 키를 여기에 입력하세요.
+)
+
+chat_completion = client.chat.completions.create(
+    messages=[
+        {
+            "role": "user",
+            "content": "안녕?",
+        }
+    ],
+    model="gpt-3.5-turbo",
+)
+
+# 메시지 내용을 출력합니다
+for message in chat_completion.choices:
+    print(message.message.content)  # 'content' 속성에 점(.)을 사용하여 접근
+
+
