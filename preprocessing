@@ -3,15 +3,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
-
-import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import classification_report
 import joblib
-
+from sklearn.preprocessing import LabelEncoder
 # 데이터셋 로드
 data = pd.read_csv('Conversation.csv')
 
@@ -40,10 +35,10 @@ model = LogisticRegression()
 
 # 모델 훈련
 model.fit(X_train, y_train)
-# ^모델과 벡터라이저 저장
-joblib.dump(model,'./data_model.')
+# ^모델과 벡터라이저 그리고 인코더 저장
+joblib.dump(model,'./data_model.joblib')
 joblib.dump(vectorizer, 'vectorizer.joblib')
-
+joblib.dump(encoder, 'encoder.joblib')
 # 성능 평가
 y_pred = model.predict(X_test)
 print(classification_report(y_test, y_pred))
